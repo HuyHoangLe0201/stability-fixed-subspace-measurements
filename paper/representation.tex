@@ -1,0 +1,392 @@
+\section{Directional-Law Stability and Finite Representation}
+This section fixes the measurement class and replaces the directional law. We first
+control information and transferred-design performance, then give conditions that
+also control optimizer distance and a finite-sample guarantee for an unknown law.
+Moment matching gives an algebraic representation guarantee ordered by powers of
+SNR, whereas projective-Wasserstein distance gives a finite-SNR metric
+perturbation guarantee without requiring polynomial moment matching.
+
+\subsection{Coverage Equivalence and Even Moments}
+\begin{definition}[Order-$r$ coverage equivalence]
+For an integer $r\ge1$, directional laws $\mu$ and $\nu$ are order-$r$ coverage-equivalent at rank $K$ if
+\begin{equation}
+M_n(P;\mu)=M_n(P;\nu),\qquad n=1,\ldots,r,
+\label{eq:equiv_def}
+\end{equation}
+for every $P\in\Pset$.
+\end{definition}
+
+Every coverage objective is unchanged by replacing $u$ with $-u$, so only the law of $uu^{\top}$ is relevant. Write $U^{\otimes 2r}$ for the $2r$-fold tensor product of $U$ and define the symmetric moment tensor
+\begin{equation}
+\mathsf T_{2r}(\mu)=\EE_\mu[U^{\otimes 2r}].
+\end{equation}
+Contracting pairs of indices recovers lower even moments because $\|U\|^2=1$. Tensor equality therefore matches all even polynomial averages of degree at most $2r$ on the sphere.
+
+\begin{lemma}[Rank-one characterization]\label{lem:characterization}
+For probability laws $\mu,\nu$ on $\mathbb S^{d-1}$, the following are equivalent:
+\begin{enumerate}
+\item $\mathsf T_{2r}(\mu)=\mathsf T_{2r}(\nu)$.
+\item The laws are order-$r$ coverage-equivalent at rank one.
+\item For Gaussian input, the supremum of $|\I_\mu(P;\gamma)-\I_\nu(P;\gamma)|$ over rank-one projectors is $O(\gamma^{r+1})$ as $\gamma\downarrow0$.
+\end{enumerate}
+These conditions imply order-$r$ coverage equivalence for every rank $K$.
+\end{lemma}
+\begin{proof}
+Tensor equality matches the polynomial $C_P(u)^n$ for every rank and $n\le r$. Conversely, rank-one matching at order $r$ gives equality of $\EE[(v^{\top}U)^{2r}]$ for every unit $v$, hence every $v\in\R^d$ by homogeneity. The coefficients of this polynomial determine the symmetric tensor. Lemma~\ref{lem:expansion} makes moment matching imply the uniform information order. For the converse, each Gaussian Taylor coefficient $(-1)^{n+1}/(2n)$ is nonzero. For every fixed rank-one projector, an information difference of order $O(\gamma^{r+1})$ forces the coefficients through order $r$ to vanish.
+\end{proof}
+
+When the target law is Haar measure, matching this tensor is the even-polynomial exactness condition of a weighted real projective $r$-design \cite{hughes2021}. The general object used below is a weighted moment-preserving cubature law; it need not be a classical unweighted design. Odd-polynomial conditions of full spherical designs are unnecessary: the uniform law on $e_1,\ldots,e_d$ and its antipodal symmetrization have identical coverage moments at every order, although the former has nonzero mean. No converse from a single higher rank to tensor equality is needed here.
+
+\subsection{Uniform Information and Design-Transfer Guarantees}
+\begin{theorem}[Information-preserving directional representation]\label{thm:representation}
+Let $r\ge1$, $\gamma_0>0$, and $h_R\in C^{r+1}([0,\gamma_0])$. The following hold for $0\le\gamma\le\gamma_0$.
+
+\emph{(a) Approximation of objectives and optimal values.} Suppose, at a fixed rank $K$,
+\begin{equation}
+\sup_{P\in\Pset}|M_n(P;\mu)-M_n(P;\nu)|\le\varepsilon_n,
+\quad 1\le n\le r,
+\end{equation}
+where $\varepsilon_n\ge0$ are moment-error bounds. With the coefficients $b_n$ of Lemma~\ref{lem:expansion}, define
+\begin{equation}
+\delta(\gamma)=\sum_{n=1}^r|b_n|\gamma^n\varepsilon_n
++\frac{2\gamma^{r+1}}{(r+1)!}\sup_{0\le s\le\gamma}|h_R^{(r+1)}(s)|.
+\label{eq:representation_delta}
+\end{equation}
+Then
+\begin{align}
+\sup_{P\in\Pset}|\I_\mu(P;\gamma)-\I_\nu(P;\gamma)|&\le\delta(\gamma),\label{eq:equiv_bound}\\
+|\I_\mu^\star(\gamma)-\I_\nu^\star(\gamma)|&\le\delta(\gamma).\label{eq:optimal_equiv_bound}
+\end{align}
+In particular, exact coverage matching sets every $\varepsilon_n$ to zero and gives a uniform $O(\gamma^{r+1})$ error.
+
+\emph{(b) Transfer of measurement designs.} If $P_\nu$ is $\eta$-optimal for the surrogate, meaning $\I_\nu^\star-\I_\nu(P_\nu;\gamma)\le\eta$ for $\eta\ge0$, then
+\begin{equation}
+0\le\I_\mu^\star(\gamma)-\I_\mu(P_\nu;\gamma)\le2\delta(\gamma)+\eta.
+\label{eq:compression_regret}
+\end{equation}
+The same conclusion holds with any valid uniform objective-error bound replacing $\delta(\gamma)$.
+
+\emph{(c) Finite directional representation.} For every law $\mu$, there is a weighted law
+\begin{equation}
+\nu_r=\sum_{\ell=1}^m w_\ell\delta_{u_\ell},\qquad
+w_\ell>0,\quad\sum_{\ell=1}^m w_\ell=1,
+\end{equation}
+where $\delta_{u_\ell}$ denotes unit point mass and every node $u_\ell$ belongs to $\operatorname{supp}\mu$, the smallest closed set of full $\mu$-measure, such that
+\begin{equation}
+m\le D_{d,r}\triangleq\binom{d+2r-1}{2r},\qquad
+\mathsf T_{2r}(\nu_r)=\mathsf T_{2r}(\mu).
+\label{eq:support_bound}
+\end{equation}
+Here $m$ is the number of nodes and $\binom{n}{k}=n!/[k!(n-k)!]$ is the binomial coefficient. The same $\nu_r$ satisfies (a) and (b), with zero moment errors, simultaneously for every measurement rank.
+\end{theorem}
+\begin{proof}
+\emph{(a)} Subtract the uniform expansions in Lemma~\ref{lem:expansion}. Each coefficient difference is bounded by $|b_n|\gamma^n\varepsilon_n$, and the two remainder bounds add. The optimal-value bound follows from $|\max f-\max g|\le\sup|f-g|$.
+
+\emph{(b)} For an original-law optimizer $P_\mu$, insert and subtract the surrogate values at $P_\mu$ and $P_\nu$ in $\I_\mu(P_\mu;\gamma)-\I_\mu(P_\nu;\gamma)$. The two approximation errors contribute at most $2\delta(\gamma)$ and surrogate suboptimality contributes at most $\eta$.
+
+\emph{(c)} Consider the $D_{d,r}$ homogeneous monomials of degree $2r$ restricted to the sphere. They are linearly independent, since a homogeneous polynomial vanishing on the sphere vanishes everywhere by radial scaling. Multiplying a lower even-degree monomial by a power of $\sum_i u_i^2=1$ shows that they span all even polynomials through degree $2r$ on the sphere.
+
+Let $\Phi(u)$ be the vector of these monomials. Its image on the compact set $\operatorname{supp}\mu$ lies in an affine hyperplane, because $(\sum_i u_i^2)^r=1$. The vector $\EE_\mu\Phi(U)$ lies in its convex hull. Carath\'eodory's theorem represents it by at most $D_{d,r}$ image points; discard zero weights. This is the classical finite-dimensional cubature argument underlying Tchakaloff's theorem \cite{bayer2006}. Lemma~\ref{lem:characterization} supplies exact coverage matching for every rank, and (a)--(b) give the information guarantees.
+\end{proof}
+
+\begin{proposition}[Projective-Wasserstein law perturbation]
+\label{prop:wasserstein}
+For $u,v\in\mathbb S^{d-1}$, define the projective distance
+\begin{equation}
+\rho(u,v)=\min\{\|u-v\|,\|u+v\|\}
+=\sqrt{2-2|u^{\top}v|}.
+\label{eq:projective_distance}
+\end{equation}
+For laws $\mu$ and $\nu$ on the sphere, define their projective
+Wasserstein-1 distance by
+\begin{equation}
+W_1^{\rm proj}(\mu,\nu)=\inf_{\pi\in\Pi(\mu,\nu)}
+\int\rho(u,v)\,d\pi(u,v),
+\label{eq:wasserstein_definition}
+\end{equation}
+where $\Pi(\mu,\nu)$ is the set of couplings with marginals $\mu$ and $\nu$.
+Equivalently, this is the Wasserstein-1 distance between the laws induced on
+real projective space, so antipodal redistribution has zero distance.
+If $h_R\in C^1([0,\gamma])$ and
+$L_\gamma=\sup_{0\le s\le\gamma}|h_R'(s)|$, then
+\begin{equation}
+\sup_{P\in\Pset}|\I_\mu(P;\gamma)-\I_\nu(P;\gamma)|
+\le \gamma L_\gamma W_1^{\rm proj}(\mu,\nu).
+\label{eq:wasserstein_objective}
+\end{equation}
+Consequently, every $\eta$-optimal design $P_\nu$ for $\nu$ satisfies
+\begin{equation}
+\I_\mu^\star(\gamma)-\I_\mu(P_\nu;\gamma)
+\le2\gamma L_\gamma W_1^{\rm proj}(\mu,\nu)+\eta.
+\label{eq:wasserstein_regret}
+\end{equation}
+For Gaussian amplitudes, $L_\gamma=1/2$, so the objective error in
+\eqref{eq:wasserstein_objective} is at most
+$\gamma W_1^{\rm proj}(\mu,\nu)/2$.
+\end{proposition}
+\begin{proof}
+Choose $\varepsilon\in\{-1,1\}$ so that
+$\theta=\arccos(u^{\top}\varepsilon v)=\arccos|u^{\top}v|\in[0,\pi/2]$.
+The two nonzero eigenvalues of
+$uu^{\top}-(\varepsilon v)(\varepsilon v)^{\top}=uu^{\top}-vv^{\top}$ are
+$\sin\theta$ and $-\sin\theta$. Ky Fan's inequalities therefore give, for
+every $P\in\Pset$,
+\begin{equation}
+|u^{\top}Pu-v^{\top}Pv|
+\le\sin\theta
+=\rho(u,v)\cos(\theta/2)
+\le\rho(u,v).
+\end{equation}
+Thus $u\mapsto h_R(\gamma u^{\top}Pu)$ is
+$\gamma L_\gamma$-Lipschitz, uniformly in $P$. Integrating under any
+coupling and then taking the infimum proves \eqref{eq:wasserstein_objective}.
+Theorem~\ref{thm:representation}(b) gives \eqref{eq:wasserstein_regret}.
+\end{proof}
+
+Figure~\ref{fig:projective_quotient} shows why the shorter of the two
+antipodal chords enters the perturbation bound.
+\ProjectiveSphereFigure
+
+\begin{corollary}[Optimizer stability under law replacement]
+\label{cor:law_optimizer}
+Let
+\begin{equation}
+e_\gamma=\sup_{P\in\Pset}
+|\I_\mu(P;\gamma)-\I_\nu(P;\gamma)|,
+\end{equation}
+and let $\mathcal M_\mu(\gamma)$ be the nonempty set of maximizers of
+$\I_\mu(\cdot;\gamma)$. Define
+$\operatorname{dist}_F(P,\mathcal M)=\inf_{Q\in\mathcal M}\|P-Q\|_F$.
+Suppose the original-law objective has quadratic growth:
+for some $\kappa>0$,
+\begin{equation}
+\I_\mu^\star(\gamma)-\I_\mu(P;\gamma)
+\ge \frac{\kappa}{2}\operatorname{dist}_F
+   (P,\mathcal M_\mu(\gamma))^2,
+\qquad P\in\Pset.
+\label{eq:quadratic_growth_law}
+\end{equation}
+If $P_\nu$ is $\eta$-optimal for $\nu$, then
+\begin{equation}
+\operatorname{dist}_F(P_\nu,\mathcal M_\mu(\gamma))
+\le \sqrt{\frac{2(2e_\gamma+\eta)}{\kappa}}.
+\label{eq:law_optimizer_distance}
+\end{equation}
+In Theorem~\ref{thm:representation}(a), one may replace $e_\gamma$ by
+$\delta(\gamma)$. If the original-law optimizer is unique, this is a direct
+Frobenius-distance bound between the transferred and original optimizers.
+\end{corollary}
+\begin{proof}
+The comparison in Theorem~\ref{thm:representation}(b), with the exact uniform
+error $e_\gamma$, gives
+$\I_\mu^\star-\I_\mu(P_\nu;\gamma)\le2e_\gamma+\eta$.
+Combining this inequality with \eqref{eq:quadratic_growth_law} proves
+\eqref{eq:law_optimizer_distance}.
+\end{proof}
+
+\begin{remark}[When quadratic growth is available]
+On the Grassmann manifold, a strict isolated maximizer whose negative objective
+has a positive-definite Riemannian Hessian satisfies a local quadratic-growth
+condition. Extending that condition to all of $\Pset$, as assumed in
+\eqref{eq:quadratic_growth_law}, additionally requires separation of the
+objective from its optimum away from the maximizing set. Uniqueness alone does
+not imply quadratic growth.
+\end{remark}
+
+\begin{corollary}[Joint SNR--directional-law stability]
+\label{cor:joint_perturbation}
+Let $\gamma,\gamma'\in[0,\Gamma]$, suppose $h_R\in C^1([0,\Gamma])$, and set
+\begin{equation}
+L_\Gamma=\sup_{0\le s\le\Gamma}|h_R'(s)|,
+\qquad
+\epsilon_{\gamma,\gamma'}
+=L_\Gamma|\gamma-\gamma'|
++L_\Gamma\min\{\gamma,\gamma'\}W_1^{\rm proj}(\mu,\nu).
+\label{eq:joint_error}
+\end{equation}
+Then
+\begin{equation}
+\sup_{P\in\Pset}|\I_\mu(P;\gamma)-\I_\nu(P;\gamma')|
+\le\epsilon_{\gamma,\gamma'}.
+\label{eq:joint_objective}
+\end{equation}
+If $P_{\nu,\gamma'}$ is $\eta$-optimal for law $\nu$ at SNR $\gamma'$, then
+\begin{equation}
+\I_\mu^\star(\gamma)-\I_\mu(P_{\nu,\gamma'};\gamma)
+\le2\epsilon_{\gamma,\gamma'}+\eta.
+\label{eq:joint_regret}
+\end{equation}
+If the target objective $\I_\mu(\cdot;\gamma)$ satisfies
+\eqref{eq:quadratic_growth_law} with constant $\kappa$, then
+\begin{equation}
+\operatorname{dist}_F(P_{\nu,\gamma'},\mathcal M_\mu(\gamma))
+\le\sqrt{\frac{2(2\epsilon_{\gamma,\gamma'}+\eta)}{\kappa}}.
+\label{eq:joint_optimizer}
+\end{equation}
+\end{corollary}
+\begin{proof}
+For every $c\in[0,1]$,
+$|h_R(\gamma c)-h_R(\gamma'c)|\le L_\Gamma|\gamma-\gamma'|$.
+If $\gamma\le\gamma'$, insert $\I_\nu(P;\gamma)$ between the two objectives;
+if $\gamma'\le\gamma$, insert $\I_\mu(P;\gamma')$ instead.
+Proposition~\ref{prop:wasserstein} then gives the projective-Wasserstein term at the
+smaller SNR, proving \eqref{eq:joint_objective}. The comparison argument of
+Theorem~\ref{thm:representation}(b) proves \eqref{eq:joint_regret}, and
+Corollary~\ref{cor:law_optimizer} proves \eqref{eq:joint_optimizer}.
+\end{proof}
+
+For Gaussian amplitudes, $L_\Gamma=1/2$, so the joint error specializes to
+\begin{equation}
+\epsilon_{\gamma,\gamma'}
+= \frac12|\gamma-\gamma'|
++\frac12\min\{\gamma,\gamma'\}W_1^{\rm proj}(\mu,\nu).
+\label{eq:joint_gaussian}
+\end{equation}
+
+The next result closes the gap between a known directional law and a law learned
+from finitely many directions. It uses the empirical law
+$\widehat\mu_N=N^{-1}\sum_{i=1}^N\delta_{U_i}$ and is uniform over the continuous
+projector class, rather than over a finite numerical candidate set.
+
+\begin{corollary}[Finite-sample learned-law guarantee]
+\label{cor:finite_sample}
+Let $N,r\ge1$, let $U_1,\ldots,U_N$ be independent samples from $\mu$, let $\gamma>0$, and
+suppose $h_R\in C^{r+1}([0,\gamma])$. Define
+\begin{equation}
+L_\gamma=\sup_{0\le s\le\gamma}|h_R'(s)|,
+\qquad
+H_\gamma=\sup_{0\le s\le\gamma}h_R(s)
+-\inf_{0\le s\le\gamma}h_R(s),
+\end{equation}
+and $p_d=d(d+1)/2$. For $0<\xi\le\sqrt K$ and $0<\alpha<1$, set
+\begin{equation}
+\Delta_N(\xi,\alpha)=2\gamma L_\gamma\xi
++H_\gamma\sqrt{\frac{p_d\log(1+2\sqrt K/\xi)+\log(2/\alpha)}{2N}}.
+\label{eq:empirical_uniform_bound}
+\end{equation}
+Then, with probability at least $1-\alpha$,
+\begin{equation}
+\sup_{P\in\Pset}|\I_\mu(P;\gamma)
+-\I_{\widehat\mu_N}(P;\gamma)|
+\le\Delta_N(\xi,\alpha).
+\label{eq:empirical_uniform_information}
+\end{equation}
+Moreover, there is a weighted law $\nu_{N,r}$ supported on at most
+\begin{equation}
+\min\left\{N,D_{d,r}\right\}
+\end{equation}
+observed directions and matching the empirical even moments through degree
+$2r$. With
+\begin{equation}
+\tau_r(\gamma)=\frac{2\gamma^{r+1}}{(r+1)!}
+\sup_{0\le s\le\gamma}|h_R^{(r+1)}(s)|,
+\end{equation}
+the same event satisfies the following bounds for every $\eta$-optimal design
+$P_{N,r}$ under $\nu_{N,r}$:
+\begin{align}
+\sup_{P\in\Pset}|\I_\mu(P;\gamma)-\I_{\nu_{N,r}}(P;\gamma)|
+&\le \Delta_N(\xi,\alpha)+\tau_r(\gamma),
+\label{eq:sample_compressed_error}\\
+\I_\mu^\star(\gamma)-\I_\mu(P_{N,r};\gamma)
+&\le2[\Delta_N(\xi,\alpha)+\tau_r(\gamma)]+\eta,
+\label{eq:sample_compressed_regret}
+\end{align}
+For Gaussian amplitudes, $\tau_r(\gamma)$ may be replaced by the sharper
+$\delta_r(\gamma)$ in \eqref{eq:compression_delta}. If
+\eqref{eq:quadratic_growth_law} holds, the right side of
+\eqref{eq:law_optimizer_distance} applies with
+$e_\gamma=\Delta_N(\xi,\alpha)+\tau_r(\gamma)$.
+\end{corollary}
+\begin{proof}
+For fixed $u$, the map $P\mapsto h_R(\gamma u^{\top}Pu)$ is
+$\gamma L_\gamma$-Lipschitz in Frobenius norm. The rank-$K$ projectors lie in
+the radius-$\sqrt K$ ball centered at the origin in the $p_d$-dimensional space of real symmetric
+matrices. A maximal $\xi$-separated subset is a $\xi$-net with cardinality at
+most $(1+2\sqrt K/\xi)^{p_d}$, by the standard disjoint-ball volume argument.
+For every net point, Hoeffding's inequality \cite{hoeffding1963} bounds the
+deviation of the empirical average of a variable with range $H_\gamma$.
+A union bound over the net gives the square-root term in
+\eqref{eq:empirical_uniform_bound}; moving from a projector to its net point
+in both the population and empirical objectives adds $2\gamma L_\gamma\xi$.
+This proves \eqref{eq:empirical_uniform_information}.
+
+Apply Theorem~\ref{thm:representation}(c) to the finite law
+$\widehat\mu_N$. Its nodes can be selected from the observed directions, so
+the support contains at most $\min\{N,D_{d,r}\}$ points. Theorem
+\ref{thm:representation}(a) bounds the empirical-to-compressed error by
+$\tau_r(\gamma)$. The triangle inequality gives
+\eqref{eq:sample_compressed_error}, and Theorem~\ref{thm:representation}(b)
+gives \eqref{eq:sample_compressed_regret}. The Gaussian and optimizer-distance
+claims follow from Corollaries~\ref{cor:gaussian_representation} and
+\ref{cor:law_optimizer}, respectively.
+\end{proof}
+
+For an explicit accuracy statement, let $L_\gamma>0$, choose a target
+$\zeta>0$, and set
+$\xi_\zeta=\min\{\sqrt K,\zeta/(4\gamma L_\gamma)\}$. The sufficient condition
+\begin{equation}
+N\ge \frac{2H_\gamma^2}{\zeta^2}
+\left[p_d\log\!\left(1+\frac{2\sqrt K}{\xi_\zeta}\right)
++\log\!\left(\frac2\alpha\right)\right]
+\label{eq:sample_complexity}
+\end{equation}
+gives $\Delta_N(\xi_\zeta,\alpha)\le\zeta$. Thus, apart from the displayed
+dimension and logarithmic factors, the directional sample size scales as
+$\zeta^{-2}$.
+
+\begin{remark}[Ambient versus intrinsic covering dimension]
+The covering argument in \eqref{eq:empirical_uniform_bound} deliberately
+embeds $\Pset$ in the $p_d=d(d+1)/2$ dimensional space of symmetric matrices,
+which gives an explicit self-contained bound. Direct metric-entropy bounds for
+the rank-$K$ Grassmann manifold can replace this ambient exponent by one that
+scales with its intrinsic dimension $K(d-K)$, at the cost of additional
+covering constants \cite{dai2008}. We retain the ambient argument so the stated
+finite-sample constant follows from the elementary volume bound alone.
+\end{remark}
+
+\begin{corollary}[Gaussian error at every finite SNR]\label{cor:gaussian_representation}
+For Gaussian amplitudes and order-$r$ coverage-equivalent laws at rank $K$, let $q=\gamma/(\gamma+2)$ and define
+\begin{equation}
+\delta_r(\gamma)=\min\left\{\frac{\gamma^{r+1}}{2(r+1)},
+\frac{q^{r+1}}{(r+1)(1-q)}\right\}.
+\label{eq:compression_delta}
+\end{equation}
+For every finite $\gamma\ge0$, both the uniform objective error and optimal-value error are at most $\delta_r(\gamma)$. A globally optimal surrogate design has original-law regret at most $2\delta_r(\gamma)$. The finite surrogate of Theorem~\ref{thm:representation}(c) has these guarantees at every rank. At fixed positive finite SNR, the error bound converges geometrically in $r$.
+\end{corollary}
+\begin{proof}
+For $h_R(s)=\tfrac12\log(1+s)$, the exact signed remainder after degree $r$ is
+\begin{equation}
+\rho_{r+1}(c)=\frac{(-1)^r}{2}\int_0^{\gamma c}\frac{t^r}{1+t}\,dt.
+\label{eq:signed_remainder}
+\end{equation}
+Its values on $0\le c\le1$ lie in an interval of length at most $\gamma^{r+1}/[2(r+1)]$. After polynomial cancellation, the difference of two expectations is bounded by this interval length.
+
+For the complementary bound, write
+\begin{equation}
+\tfrac12\log(1+\gamma c)=\tfrac12\log(1+\gamma/2)
++\tfrac12\log(1+q(2c-1)).
+\end{equation}
+The second logarithm's degree-$r$ polynomial has uniform remainder at most $q^{r+1}/[2(r+1)(1-q)]$. Coverage matching cancels this polynomial and the two remainder bounds add. Theorem~\ref{thm:representation}(a)--(b) transfers the resulting objective bound to optimal values and design regret.
+\end{proof}
+
+For a prescribed SNR interval $0\le\gamma\le\Gamma$ with $\Gamma>0$, the same Gaussian surrogate has uniform error at most $\delta_r(\Gamma)$. For $0<\epsilon<1$, set $q_\Gamma=\Gamma/(\Gamma+2)$. It suffices to choose $r\ge1$ with
+\begin{equation}
+r+1\ge\frac{\log[1/(\epsilon(1-q_\Gamma))]}{-\log q_\Gamma}
+\label{eq:error_budget}
+\end{equation}
+to obtain error at most $\epsilon$ and transfer regret at most $2\epsilon$. At fixed $d$ and $\Gamma$, the sufficient support size is $O((\log(1/\epsilon))^{d-1})$. This is a cubature-existence guarantee, not a computational-efficiency bound; statistical sample complexity is given separately by \eqref{eq:sample_complexity}. For example, $D_{8,1}=36$, $D_{8,2}=330$, and $D_{8,3}=1716$, so the bound need not compress a smaller original law. For finite laws, linear moment constraints provide a constructive route, with residual moment errors covered by Theorem~\ref{thm:representation}(a).
+
+\subsection{Spherical Designs and Explicit Ensembles}
+A spherical $t$-design reproduces spherical averages of all polynomials of degree at most $t$ \cite{delsarte1977}. It is therefore sufficient, though not necessary, for even-moment matching.
+\begin{corollary}[Spherical-design information preservation]\label{cor:design}
+Let $\mu_r$ be a spherical $2r$-design and $\sigma$ the Haar law. Under the regularity assumption of Theorem~\ref{thm:representation},
+\begin{equation}
+\sup_{P\in\Pset}|\I_{\mu_r}(P;\gamma)-\I_\sigma(P;\gamma)|
+\le\frac{2\gamma^{r+1}}{(r+1)!}\sup_{0\le s\le\gamma}|h_R^{(r+1)}(s)|.
+\label{eq:design_bound}
+\end{equation}
+For Gaussian input, the sharper bound $\delta_r(\gamma)$ holds.
+\end{corollary}
+\begin{proof}
+Each $C_P(u)^n$ is a polynomial of degree $2n$. A spherical $2r$-design therefore matches coverage moments for $n\le r$. Apply Theorem~\ref{thm:representation}(a) and Corollary~\ref{cor:gaussian_representation}.
+\end{proof}

@@ -1,0 +1,9 @@
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/build-pass-*.txt
+validation/precision_revision_pages/
+__pycache__/
+*.pyc
+.DS_Store

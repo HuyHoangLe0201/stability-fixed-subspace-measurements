@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "seed": 7192026,
+  "multirank_quadratic_envelope_cases": 1680,
+  "projective_transport_perturbation_cases": 880,
+  "independent_coverage_moment_max_residual": 8.881784197001252e-16
+}

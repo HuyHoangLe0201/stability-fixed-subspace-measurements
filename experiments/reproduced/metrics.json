@@ -1,0 +1,21 @@
+{
+  "ks_real": 0.004857056250410663,
+  "ks_complex": 0.005322302031658954,
+  "acg_20db": {
+    "snr_db": 20,
+    "information": 1.972637273330479,
+    "se": 0.0017728155143180782,
+    "haar": 1.4482649751445869,
+    "empirical_converse": 2.0557457639897536,
+    "selected_candidate": 0
+  },
+  "slope_axes": 1.997970157874031,
+  "slope_icosahedron": 2.9964214662107955,
+  "icosahedron_moment_error": 2.498001805406602e-16,
+  "bpsk_ratio_20db": 0.4564944705591047,
+  "bpsk_quadrature_difference": 3.3306690738754696e-16,
+  "seed": 20260918,
+  "python": "3.12.14",
+  "numpy": "2.2.4",
+  "scipy": "1.15.2"
+}

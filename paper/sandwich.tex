@@ -1,0 +1,74 @@
+\section{Sharp Information Benchmarks}
+The stability result compares designs for a fixed law. The following bounds provide reference values across laws and clarify what the second moment alone can determine.
+
+For $a,b>0$, $\operatorname{Beta}(a,b)$ is the distribution on $(0,1)$ with density $c^{a-1}(1-c)^{b-1}/B(a,b)$, where $B(a,b)=\int_0^1t^{a-1}(1-t)^{b-1}\,dt$ is the beta function. Define
+\begin{equation}
+\Bbase_{d,K,R}(\gamma)=\EE_C[h_R(\gamma C)],\quad
+C\sim\operatorname{Beta}\!\left(\frac K2,\frac{d-K}{2}\right).
+\label{eq:Bbase}
+\end{equation}
+Write $\sigma$ for the Haar-uniform directional law. For Gaussian amplitudes, abbreviate $\Bbase_{d,K,R}$ as $\Bbase_{d,K}$.
+
+\begin{theorem}[Sharp information sandwich]\label{thm:sandwich}
+For the centered unit-variance amplitude in the model, every directional law $\mu$ and every $\gamma\ge0$ satisfy
+\begin{equation}
+\Bbase_{d,K,R}(\gamma)\le\I_\mu^\star(\gamma)
+\le h_R\!\left(\gamma a_K(S_2)\right).
+\label{eq:sandwich}
+\end{equation}
+Both endpoints are sharp in the following senses.
+
+\emph{(a) Least-favorable directional law.} For every rank-$K$ projector, $\I_\sigma(P;\gamma)=\Bbase_{d,K,R}(\gamma)$, and hence
+\begin{equation}
+\inf_\mu\I_\mu^\star(\gamma)=\Bbase_{d,K,R}(\gamma).
+\end{equation}
+
+\emph{(b) Prescribed second moment.} For every positive semidefinite matrix $S$ with $\tr S=1$, a finite directional law with $S_2=S$ attains
+\begin{equation}
+\I_\mu^\star(\gamma)=h_R(\gamma a_K(S))
+\end{equation}
+for every $\gamma\ge0$ and every admissible amplitude law. Here $a_K(S)$ is the sum of the $K$ largest eigenvalues of $S$.
+\end{theorem}
+\begin{proof}
+Let $P_H$ be a rank-$K$ projector with the rotation-invariant uniform (Haar) law. For each fixed unit $u$,
+\begin{equation}
+u^{\top}P_Hu\sim\operatorname{Beta}\!\left(\frac K2,\frac{d-K}{2}\right).
+\label{eq:beta}
+\end{equation}
+Averaging $\I_\mu(P_H;\gamma)$ over $P_H$ gives $\Bbase_{d,K,R}(\gamma)$, so at least one deterministic projector has value no smaller than this average. If instead $U$ is Haar-uniform and $P$ is fixed, the same projection law holds, proving (a).
+
+Concavity and monotonicity of $h_R$, followed by Ky Fan's maximum principle, give
+\begin{equation}
+\I_\mu(P;\gamma)\le h_R(\gamma\tr(PS_2))
+\le h_R(\gamma a_K(S_2)).
+\label{eq:jensen}
+\end{equation}
+For (b), write $S=V\operatorname{diag}(\lambda_1,\ldots,\lambda_d)V^{\top}$, where $V$ is orthogonal and the eigenvalues are in nonincreasing order. Set
+\begin{equation}
+U=V(\sqrt{\lambda_1}\varepsilon_1,\ldots,\sqrt{\lambda_d}\varepsilon_d)^{\top},
+\end{equation}
+where the $\varepsilon_i$ are independent equiprobable signs. Then $\|U\|=1$ and $\EE UU^{\top}=S$. The leading eigenspace projector has constant coverage $a_K(S)$ and attains the upper endpoint.
+\end{proof}
+
+An isotropic second moment alone does not give equality in (a). Likewise, (b) is sharp over laws with the specified moment and need not be tight for each individual law. Subtracting \eqref{eq:sandwich} from full-observation information gives the corresponding loss bounds,
+\begin{equation}
+h_R(\gamma)-h_R(\gamma a_K(S_2))\le\Lloss_\mu^\star(\gamma)
+\le h_R(\gamma)-\Bbase_{d,K,R}(\gamma).
+\label{eq:loss_sandwich}
+\end{equation}
+The recoverable directional-structure gain $G_\mu(K,\gamma)=\I_\mu^\star(\gamma)-\Bbase_{d,K,R}(\gamma)$ consequently lies between zero and $h_R(\gamma a_K(S_2))-\Bbase_{d,K,R}(\gamma)$.
+
+\subsection{Supporting Curvature Refinement}
+\begin{proposition}[Uniform curvature penalty]
+Suppose $h_R\in C^2([0,\gamma])$ and $-h_R''(s)\ge\kappa$ there for a constant $\kappa\ge0$. For any coverage variable $C\in[0,1]$, let $\operatorname{Var}(C)=\EE[(C-\EE C)^2]$. Then
+\begin{equation}
+\EE[h_R(\gamma C)]\le h_R(\gamma\EE C)
+-\frac{\kappa\gamma^2}{2}\operatorname{Var}(C).
+\label{eq:curvature_penalty}
+\end{equation}
+For Gaussian input one may take $\kappa=1/[2(1+\gamma)^2]$.
+\end{proposition}
+\begin{proof}
+Taylor-expand around $\gamma\EE C$ and use the lower bound on $-h_R''$. The expected first-order term vanishes.
+\end{proof}
+This is a Jensen-gap refinement. Larger variance alone does not order two laws with the same mean. A valid ordering follows under convex order: $C_1\preceq_{\rm cx}C_2$ means $\EE\phi(C_1)\le\EE\phi(C_2)$ for every convex $\phi$, in which case concavity gives $\EE h_R(\gamma C_1)\ge\EE h_R(\gamma C_2)$.

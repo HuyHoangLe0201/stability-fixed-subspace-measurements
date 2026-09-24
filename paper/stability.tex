@@ -1,0 +1,72 @@
+\subsection{Main Stability Theorem}
+Let $P_0$ be the projector onto the leading $K$ eigenvectors of $S_2$. The next theorem gives both finite-SNR guarantees and, under additional regularity, the low-SNR expansion for every global optimizer.
+
+\begin{theorem}[Stability of covariance-based measurement]\label{thm:stability}
+Suppose $h_R\in C^1([0,\gamma_0])$ for some $\gamma_0>0$, $a=h_R'(0)>0$, and $\Delta=\lambda_K(S_2)-\lambda_{K+1}(S_2)>0$. Set
+\begin{equation}
+\beta_\gamma=\sup_{0\le s\le\gamma}|h_R'(s)-a|.
+\end{equation}
+\emph{(a) Finite-SNR certificate.} For every $0<\gamma\le\gamma_0$ and every global optimizer $P_\gamma$,
+\begin{align}
+\|P_\gamma-P_0\|_F&\le\frac{\sqrt2\,\beta_\gamma}{a\Delta},\label{eq:explicit_distance}\\
+0\le\I_\mu^\star(\gamma)-\I_\mu(P_0;\gamma)
+&\le\frac{\gamma\beta_\gamma^2}{4a\Delta}.\label{eq:explicit_regret}
+\end{align}
+If additionally $h_R\in C^2([0,\gamma_0])$ and $\sup_{[0,\gamma]}|h_R''|\le L$, these bounds are respectively $\sqrt2 L\gamma/(a\Delta)$ and $L^2\gamma^3/(4a\Delta)$. Under this $C^2$ assumption, $\I_\mu^\star(\gamma)=a\,a_K(S_2)\gamma+O(\gamma^2)$. For Gaussian input the distance and regret bounds become
+\begin{align}
+\|P_\gamma-P_0\|_F&\le\frac{\sqrt2\gamma}{(1+\gamma)\Delta},\\
+\I_\mu^\star(\gamma)-\I_\mu(P_0;\gamma)&\le\frac{\gamma^3}{8(1+\gamma)^2\Delta}.
+\label{eq:gauss_regret}
+\end{align}
+In particular, $P_\gamma\to P_0$ as $\gamma\downarrow0$.
+
+\emph{(b) Low-SNR expansion.} If additionally $h_R\in C^3([0,\gamma_0])$, then
+\begin{equation}
+\I_\mu^\star(\gamma)=h_R'(0)a_K(S_2)\gamma
++\tfrac12h_R''(0)M_2(P_0;\mu)\gamma^2+O(\gamma^3),
+\label{eq:second_opt}
+\end{equation}
+and $\|P_\gamma-P_0\|_F=O(\gamma)$ for every optimizer.
+\end{theorem}
+\begin{proof}
+\emph{(a)} Let $D=\|P-P_0\|_F$. The spectral-gap inequality is
+\begin{equation}
+\tr((P_0-P)S_2)\ge\Delta(K-\tr(PP_0))=\frac{\Delta D^2}{2}.
+\label{eq:gap_distance}
+\end{equation}
+Indeed, in an eigenbasis of $S_2$, the trace loss is at least $\Delta$ times the mass that $P$ places outside the leading eigenspace. For equal-rank orthogonal projectors, the nonzero eigenvalues of $P-P_0$ occur in opposite pairs (the sines of the principal angles); hence $\|P-P_0\|_{\rm op}\le D/\sqrt2$.
+
+Write $g_\gamma(c)=h_R(\gamma c)-a\gamma c$. Since $|g_\gamma'(c)|\le\gamma\beta_\gamma$ on $[0,1]$,
+\begin{equation}
+\I_\mu(P;\gamma)-\I_\mu(P_0;\gamma)
+\le-\frac{a\gamma\Delta D^2}{2}
++\frac{\gamma\beta_\gamma D}{\sqrt2}.
+\label{eq:quadratic_tradeoff}
+\end{equation}
+For $P=P_\gamma$ the left side is nonnegative; dividing by $D$ when $D>0$ proves \eqref{eq:explicit_distance}. Maximizing the quadratic right side over $D\ge0$ proves \eqref{eq:explicit_regret}. The curvature estimate follows from the mean-value theorem. In the Gaussian case $a=1/2$ and $\beta_\gamma=\gamma/[2(1+\gamma)]$.
+Continuity of $h_R'$ at zero makes $\beta_\gamma\to0$, proving convergence to $P_0$. Under the stated $C^2$ assumption, the uniform first-order expansion in Lemma~\ref{lem:expansion} and maximization of $\tr(PS_2)$ give the first-order value formula.
+
+\emph{(b)} Appendix~\ref{app:subspace} applies the implicit-function theorem to the gradient of the normalized objective in a local chart. Part (a) places every global optimizer near $P_0$ for sufficiently small SNR, so each lies on the resulting stationary branch. The displacement is $O(\gamma)$, the leading trace changes quadratically, and evaluation of the second-order coefficient at $P_0$ gives \eqref{eq:second_opt}.
+\end{proof}
+
+The bounds can be loose when $\Delta$ is small and do not assert finite-SNR uniqueness. Their value is an explicit certificate for using $P_0$. For example, in the Gaussian case and any prescribed $0<\epsilon<\sqrt2$, the condition
+$\gamma\le\epsilon\Delta/(\sqrt2-\epsilon\Delta)$ guarantees $\|P_\gamma-P_0\|_F\le\epsilon$.
+
+\begin{corollary}[Cubic cost of covariance-only design]\label{cor:cubic_regret}
+Under the $C^3$ hypotheses of Theorem~\ref{thm:stability}(b), write $U=(x^{\top},y^{\top})^{\top}$ in an orthonormal eigenbasis of $S_2$, where $x\in\R^K$ contains the leading coordinates and $y\in\R^{d-K}$ the remaining coordinates. Define $A_{ji}=\EE[\|x\|^2y_jx_i]$; Appendix~\ref{app:subspace} gives the corresponding local chart. Then
+\begin{equation}
+\I_\mu^\star(\gamma)-\I_\mu(P_0;\gamma)
+=\frac{h_R''(0)^2\gamma^3}{h_R'(0)}
+\sum_{i=1}^K\sum_{j=1}^{d-K}\frac{A_{ji}^2}{\lambda_i-\lambda_{K+j}}+o(\gamma^3).
+\label{eq:cubic_regret}
+\end{equation}
+Thus the cubic order in \eqref{eq:explicit_regret} is attained whenever $h_R''(0)\ne0$ and at least one $A_{ji}$ is nonzero.
+\end{corollary}
+\begin{proof}
+In the chart of Appendix~\ref{app:subspace}, subtract the value at $T=0$ from the value at $T_\gamma$. The leading two contributions are
+\begin{equation*}
+-h_R'(0)\gamma\sum_{j,i}(\lambda_i-\lambda_{K+j})(T_\gamma)_{ji}^2
++2h_R''(0)\gamma^2\sum_{j,i}A_{ji}(T_\gamma)_{ji}.
+\end{equation*}
+Substituting \eqref{eq:tilt} gives \eqref{eq:cubic_regret}. The scalar $C^3$ assumption gives an $O(\gamma^3)$ bound on the chart gradient of the Taylor remainder, so its change between $0$ and $T_\gamma=O(\gamma)$ is $O(\gamma^4)$. The remaining chart errors are also $o(\gamma^3)$.
+\end{proof}

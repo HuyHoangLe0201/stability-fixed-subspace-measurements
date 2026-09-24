@@ -1,0 +1,487 @@
+[
+  {
+    "doi": "10.1109/TIT.2004.831784",
+    "title": [
+      "Second-Order Asymptotics of Mutual Information"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "50",
+    "issue": "8",
+    "page": "1567-1580",
+    "date": {
+      "date-parts": [
+        [
+          2004,
+          8
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2004.831784",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2002.1003824",
+    "title": [
+      "Spectral efficiency in the wideband regime"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "48",
+    "issue": "6",
+    "page": "1319-1343",
+    "date": {
+      "date-parts": [
+        [
+          2002,
+          6
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2002.1003824",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2005.844072",
+    "title": [
+      "Mutual Information and Minimum Mean-Square Error in Gaussian Channels"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "51",
+    "issue": "4",
+    "page": "1261-1282",
+    "date": {
+      "date-parts": [
+        [
+          2005,
+          4
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2005.844072",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2011.2111010",
+    "title": [
+      "Estimation in Gaussian Noise: Properties of the Minimum Mean-Square Error"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "57",
+    "issue": "4",
+    "page": "2371-2385",
+    "date": {
+      "date-parts": [
+        [
+          2011,
+          4
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2011.2111010",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2005.860424",
+    "title": [
+      "Gradient of mutual information in linear vector Gaussian channels"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "52",
+    "issue": "1",
+    "page": "141-154",
+    "date": {
+      "date-parts": [
+        [
+          2006,
+          1
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2005.860424",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2009.2023749",
+    "title": [
+      "Hessian and Concavity of Mutual Information, Differential Entropy, and Entropy Power in Linear Vector Gaussian Channels"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "55",
+    "issue": "8",
+    "page": "3613-3628",
+    "date": {
+      "date-parts": [
+        [
+          2009,
+          8
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2009.2023749",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2014.2333746",
+    "title": [
+      "Fading Channels With Arbitrary Inputs: Asymptotics of the Constrained Capacity and Information and Estimation Measures"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "60",
+    "issue": "9",
+    "page": "5653-5672",
+    "date": {
+      "date-parts": [
+        [
+          2014,
+          9
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2014.2333746",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1137/120878380",
+    "title": [
+      "Communications-Inspired Projection Design with Application to Compressive Sensing"
+    ],
+    "container": [
+      "SIAM Journal on Imaging Sciences"
+    ],
+    "volume": "5",
+    "issue": "4",
+    "page": "1185-1212",
+    "date": {
+      "date-parts": [
+        [
+          2012,
+          1
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1137/120878380",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TPAMI.2016.2568189",
+    "title": [
+      "Information-Theoretic Compressive Measurement Design"
+    ],
+    "container": [
+      "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    ],
+    "volume": "39",
+    "issue": "6",
+    "page": "1150-1164",
+    "date": {
+      "date-parts": [
+        [
+          2017,
+          6,
+          1
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TPAMI.2016.2568189",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1016/j.csda.2018.03.002",
+    "title": [
+      "Optimal projection of observations in a Bayesian setting"
+    ],
+    "container": [
+      "Computational Statistics &amp; Data Analysis"
+    ],
+    "volume": "124",
+    "issue": null,
+    "page": "252-276",
+    "date": {
+      "date-parts": [
+        [
+          2018,
+          8
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1016/j.csda.2018.03.002",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1137/25M1740164",
+    "title": [
+      "Expected Information Gain Estimation via Density Approximations: Sample Allocation and Dimension Reduction"
+    ],
+    "container": [
+      "SIAM/ASA Journal on Uncertainty Quantification"
+    ],
+    "volume": "14",
+    "issue": "3",
+    "page": "974-1007",
+    "date": {
+      "date-parts": [
+        [
+          2026,
+          7,
+          14
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1137/25M1740164",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/ISM.Workshops.2007.61",
+    "title": [
+      "Beta Random Projection"
+    ],
+    "container": [
+      "Ninth IEEE International Symposium on Multimedia Workshops (ISMW 2007)"
+    ],
+    "volume": null,
+    "issue": null,
+    "page": "323-328",
+    "date": {
+      "date-parts": [
+        [
+          2007,
+          12
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/ISM.Workshops.2007.61",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1093/jrsssb/qkae035",
+    "title": [
+      "Spherical random projection"
+    ],
+    "container": [
+      "Journal of the Royal Statistical Society Series B: Statistical Methodology"
+    ],
+    "volume": "86",
+    "issue": "5",
+    "page": "1364-1382",
+    "date": {
+      "date-parts": [
+        [
+          2024,
+          4,
+          9
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1093/jrsssb/qkae035",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2003.817466",
+    "title": [
+      "Grassmannian beamforming for multiple-input multiple-output wireless systems"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "49",
+    "issue": "10",
+    "page": "2735-2747",
+    "date": {
+      "date-parts": [
+        [
+          2003,
+          10
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2003.817466",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/TIT.2007.915691",
+    "title": [
+      "Quantization Bounds on Grassmann Manifolds and Applications to MIMO Communications"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "54",
+    "issue": "3",
+    "page": "1108-1123",
+    "date": {
+      "date-parts": [
+        [
+          2008,
+          3
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/TIT.2007.915691",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1007/BF03187604",
+    "title": [
+      "Spherical codes and designs"
+    ],
+    "container": [
+      "Geometriae Dedicata"
+    ],
+    "volume": "6",
+    "issue": "3",
+    "page": "363-388",
+    "date": {
+      "date-parts": [
+        [
+          1977,
+          9
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1007/BF03187604",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1016/0024-3795(95)00101-V",
+    "title": [
+      "Some constructions of spherical 5-designs"
+    ],
+    "container": [
+      "Linear Algebra and its Applications"
+    ],
+    "volume": "226-228",
+    "issue": null,
+    "page": "163-196",
+    "date": {
+      "date-parts": [
+        [
+          1995,
+          9
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1016/0024-3795(95)00101-V",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1016/j.laa.2020.08.010",
+    "title": [
+      "Spherical (t,t)-designs with a small number of vectors"
+    ],
+    "container": [
+      "Linear Algebra and its Applications"
+    ],
+    "volume": "608",
+    "issue": null,
+    "page": "84-106",
+    "date": {
+      "date-parts": [
+        [
+          2021,
+          1
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1016/j.laa.2020.08.010",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1090/S0002-9939-06-08249-9",
+    "title": [
+      "The proof of Tchakaloff’s Theorem"
+    ],
+    "container": [
+      "Proceedings of the American Mathematical Society"
+    ],
+    "volume": "134",
+    "issue": "10",
+    "page": "3035-3040",
+    "date": {
+      "date-parts": [
+        [
+          2006,
+          5,
+          4
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1090/S0002-9939-06-08249-9",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1109/18.978730",
+    "title": [
+      "Communication on the Grassmann manifold: a geometric approach to the noncoherent multiple-antenna channel"
+    ],
+    "container": [
+      "IEEE Transactions on Information Theory"
+    ],
+    "volume": "48",
+    "issue": "2",
+    "page": "359-383",
+    "date": {
+      "date-parts": [
+        [
+          2002
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1109/18.978730",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1093/biomet/74.3.579",
+    "title": [
+      "Statistical analysis for the angular central Gaussian distribution on the sphere"
+    ],
+    "container": [
+      "Biometrika"
+    ],
+    "volume": "74",
+    "issue": "3",
+    "page": "579-589",
+    "date": {
+      "date-parts": [
+        [
+          1987
+        ]
+      ]
+    },
+    "source": "https://api.crossref.org/works/10.1093/biomet/74.3.579",
+    "status": "resolved"
+  },
+  {
+    "doi": "10.1080/01621459.1963.10500830",
+    "title": [
+      "Probability Inequalities for Sums of Bounded Random Variables"
+    ],
+    "container": [
+      "Journal of the American Statistical Association"
+    ],
+    "volume": "58",
+    "issue": "301",
+    "page": "13-30",
+    "date": {
+      "date-parts": [
+        [
+          1963
+        ]
+      ]
+    },
+    "source": "https://www.tandfonline.com/doi/abs/10.1080/01621459.1963.10500830",
+    "status": "resolved"
+  }
+]

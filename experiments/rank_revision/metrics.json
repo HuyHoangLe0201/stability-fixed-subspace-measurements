@@ -1,0 +1,111 @@
+{
+  "seed": 20260920,
+  "d": 8,
+  "K": 2,
+  "original_nodes": 600,
+  "orders": [
+    1,
+    2,
+    3
+  ],
+  "numpy": "2.2.4",
+  "scipy": "1.15.2",
+  "status": "passed",
+  "max_coverage_moment_residual": 6.661338147750939e-16,
+  "max_monomial_residual": 8.881784197001252e-16,
+  "scope": "Exact transfer regret over a common finite candidate family; no global projector certificate",
+  "surrogates": [
+    {
+      "order": 1,
+      "bound": 36,
+      "residual": 1.6653345369377348e-16,
+      "method": "positive moment linear program with support weight refinement"
+    },
+    {
+      "order": 2,
+      "bound": 330,
+      "residual": 8.881784197001252e-16,
+      "method": "positive moment linear program with support weight refinement"
+    },
+    {
+      "order": 3,
+      "bound": 1716,
+      "residual": 0.0,
+      "method": "original law retained: support bound exceeds original size"
+    }
+  ],
+  "results": [
+    {
+      "order": 1,
+      "nodes": 36,
+      "gamma": 1.0,
+      "candidates": 525,
+      "candidate_information_error": 0.003596076887520866,
+      "candidate_transfer_regret": 0.00015406813937138275,
+      "best_original_information": 0.2030535028239893,
+      "transferred_information": 0.2028994346846179,
+      "exact_moment_reference_bound": 0.08333333333333331,
+      "moment_residual": 1.6653345369377348e-16
+    },
+    {
+      "order": 2,
+      "nodes": 330,
+      "gamma": 1.0,
+      "candidates": 525,
+      "candidate_information_error": 8.015688327886461e-05,
+      "candidate_transfer_regret": 1.318832664937153e-06,
+      "best_original_information": 0.2030535028239893,
+      "transferred_information": 0.20305218399132435,
+      "exact_moment_reference_bound": 0.018518518518518514,
+      "moment_residual": 8.881784197001252e-16
+    },
+    {
+      "order": 3,
+      "nodes": 600,
+      "gamma": 1.0,
+      "candidates": 525,
+      "candidate_information_error": 1.942890293094024e-16,
+      "candidate_transfer_regret": 1.1102230246251565e-16,
+      "best_original_information": 0.2030535028239893,
+      "transferred_information": 0.20305350282398918,
+      "exact_moment_reference_bound": 0.0046296296296296285,
+      "moment_residual": 0.0
+    },
+    {
+      "order": 1,
+      "nodes": 36,
+      "gamma": 10.0,
+      "candidates": 525,
+      "candidate_information_error": 0.045027748706405024,
+      "candidate_transfer_regret": 0.003959141690969448,
+      "best_original_information": 0.8562085039835272,
+      "transferred_information": 0.8522493622925578,
+      "exact_moment_reference_bound": 2.083333333333334,
+      "moment_residual": 1.6653345369377348e-16
+    },
+    {
+      "order": 2,
+      "nodes": 330,
+      "gamma": 10.0,
+      "candidates": 525,
+      "candidate_information_error": 0.005125528586532757,
+      "candidate_transfer_regret": 0.00020243555058407914,
+      "best_original_information": 0.8562085039835272,
+      "transferred_information": 0.8560060684329431,
+      "exact_moment_reference_bound": 1.1574074074074079,
+      "moment_residual": 8.881784197001252e-16
+    },
+    {
+      "order": 3,
+      "nodes": 600,
+      "gamma": 10.0,
+      "candidates": 525,
+      "candidate_information_error": 7.771561172376096e-16,
+      "candidate_transfer_regret": 0.0,
+      "best_original_information": 0.8562085039835272,
+      "transferred_information": 0.8562085039835272,
+      "exact_moment_reference_bound": 0.7233796296296299,
+      "moment_residual": 0.0
+    }
+  ]
+}
