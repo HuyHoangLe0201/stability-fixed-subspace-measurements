@@ -186,6 +186,13 @@ reduces exactly to the scalar functional
 \end{equation}
 where the notation $U\sim\mu$ means that $U$ has probability law $\mu$.
 
+This reduction is the organizing idea of the paper. At small SNR, the first
+term of $h_R(\gamma C_P(U))$ depends only on the average coverage, so the
+directional second moment selects a baseline subspace. At finite SNR,
+higher coverage moments can move the best subspace. If the directional law
+is estimated or compressed, a bound that holds for every candidate subspace
+lets us transfer a design without knowing its optimizer in advance.
+
 The central question is how stable an information-optimal fixed measurement remains when the SNR or the directional law is uncertain. Three main results organize the answer at the measurement, information-limit, and statistical-representation levels.
 \begin{enumerate}
 \item \emph{Stability of covariance-based measurement.} Theorem~\ref{thm:stability} combines finite-SNR distance and information-regret certificates with the low-SNR optimal-value expansion. The second moment selects the limiting subspace; fourth-degree contractions determine its first departure and the cubic information cost in Corollary~\ref{cor:cubic_regret}. Under an isotropic second moment, fourth-degree geometry can instead select the leading orientation (Corollary~\ref{cor:fourth}).
@@ -466,7 +473,7 @@ This corollary identifies a concrete sense in which second-order directional sta
 Figure~\ref{fig:law_stability_mechanism} shows how the algebraic, transport,
 and finite-data routes feed the same uniform information error before that
 error is propagated to design-level guarantees.
-\begin{figure}[H]
+\begin{figure}[t]
 \centering
 \resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[
@@ -525,6 +532,11 @@ and cubature path supplies the finite-data realization of the moment route.}
 \subsubsection{Canonical finite ensembles}
 The numerical study considers three finite ensembles in $d=3$. The antipodal coordinate axes provide a low-order discrete benchmark with isotropic second moment. The regular tetrahedron provides a compact noncontinuous spherical design. The regular icosahedron is a tight spherical 5-design in three dimensions \cite{reznick1995}. Their role is not to introduce new designs, but to test the predicted information-preservation order.
 
+For the three-dimensional plots below, parameterize a unit measurement
+direction by $v=(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta)^\top$
+and write $P_v=vv^\top$. Here $\theta$ is the polar angle and $\phi$ the
+azimuthal angle; the plotted angles are in degrees.
+
 \begin{proposition}[Explicit second- and third-order separation]\label{prop:examples}
 Let $d=3$, $K=1$, and let the amplitude be Gaussian. For uniform antipodal coordinate axes and for the regular tetrahedron,
 \begin{equation}
@@ -552,10 +564,7 @@ For the icosahedron, coverage along a vertex is $1$ with probability $1/6$ and $
 \end{proof}
 
 Figure~\ref{fig:three_dimensional_landscapes} displays the full rank-one
-information landscapes behind Proposition~\ref{prop:examples}. For a unit
-measurement direction
-$v=(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta)^\top$,
-write $P_v=vv^\top$. At Gaussian SNR $\gamma=3$, a uniform ensemble of
+information landscapes behind Proposition~\ref{prop:examples}. At Gaussian SNR $\gamma=3$, a uniform ensemble of
 $m$ directions $u_j$ has the exact information value
 \begin{equation}
 \I_\mu(P_v;3)=\frac{1}{2m}\sum_{j=1}^{m}
@@ -577,7 +586,7 @@ contains every distinct rank-one projector, up to its boundary identification.
    +ln(1+(-sin(#1)*cos(#2)+sin(#1)*sin(#2)-cos(#1))^2)
    +ln(1+(-sin(#1)*cos(#2)-sin(#1)*sin(#2)+cos(#1))^2))/8}%
 }
-\begin{figure}[H]
+\begin{figure}[t]
 \centering
 \begin{minipage}{0.49\textwidth}\centering
 \begin{tikzpicture}
@@ -679,13 +688,15 @@ and hence
 +o(1).
 \label{eq:haar_high}
 \end{equation}
+Define the Haar-law information loss by
+$\Lloss_{\rm Haar}(\gamma)=\tfrac12\log(1+\gamma)-\Bbase_{d,K}(\gamma)$.
 The additive high-SNR information penalty relative to full observation is therefore
 \begin{equation}
 \Lloss_{\rm Haar}(\gamma)\to
 \frac12\left[\psi\!\left(\frac d2\right)-\psi\!\left(\frac K2\right)\right].
 \label{eq:digamma}
 \end{equation}
-Here $\Lloss_{\rm Haar}=\tfrac12\log(1+\gamma)-\Bbase_{d,K}(\gamma)$ is the full-observation information loss under Haar directions. To justify the limit, write the difference from $\tfrac12\log\gamma$ as $\tfrac12\EE\log(C+1/\gamma)$. For $\gamma\ge1$, the absolute value is bounded by $|\log C|+\log2$, which is integrable under the Beta law. Dominated convergence applies.
+To justify the limit, write the difference from $\tfrac12\log\gamma$ as $\tfrac12\EE\log(C+1/\gamma)$. For $\gamma\ge1$, the absolute value is bounded by $|\log C|+\log2$, which is integrable under the Beta law. Dominated convergence applies.
 
 \input{numerical_revision.tex}
 

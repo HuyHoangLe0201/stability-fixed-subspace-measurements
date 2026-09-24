@@ -41,12 +41,14 @@ When the target law is Haar measure, matching this tensor is the even-polynomial
 \begin{theorem}[Information-preserving directional representation]\label{thm:representation}
 Let $r\ge1$, $\gamma_0>0$, and $h_R\in C^{r+1}([0,\gamma_0])$. The following hold for $0\le\gamma\le\gamma_0$.
 
-\emph{(a) Approximation of objectives and optimal values.} Suppose, at a fixed rank $K$,
+\emph{(a) Approximation of objectives and optimal values.} Let
+$\varepsilon_n\ge0$, $1\le n\le r$, be bounds on the coverage-moment
+errors at a fixed rank $K$, so that
 \begin{equation}
 \sup_{P\in\Pset}|M_n(P;\mu)-M_n(P;\nu)|\le\varepsilon_n,
 \quad 1\le n\le r,
 \end{equation}
-where $\varepsilon_n\ge0$ are moment-error bounds. With the coefficients $b_n$ of Lemma~\ref{lem:expansion}, define
+With the coefficients $b_n$ of Lemma~\ref{lem:expansion}, define
 \begin{equation}
 \delta(\gamma)=\sum_{n=1}^r|b_n|\gamma^n\varepsilon_n
 +\frac{2\gamma^{r+1}}{(r+1)!}\sup_{0\le s\le\gamma}|h_R^{(r+1)}(s)|.
@@ -66,12 +68,14 @@ In particular, exact coverage matching sets every $\varepsilon_n$ to zero and gi
 \end{equation}
 The same conclusion holds with any valid uniform objective-error bound replacing $\delta(\gamma)$.
 
-\emph{(c) Finite directional representation.} For every law $\mu$, there is a weighted law
+\emph{(c) Finite directional representation.} Write $\delta_u$ for unit
+point mass at $u$ and $\operatorname{supp}\mu$ for the smallest closed set
+of full $\mu$-measure. For every law $\mu$, there is a weighted law
 \begin{equation}
 \nu_r=\sum_{\ell=1}^m w_\ell\delta_{u_\ell},\qquad
 w_\ell>0,\quad\sum_{\ell=1}^m w_\ell=1,
 \end{equation}
-where $\delta_{u_\ell}$ denotes unit point mass and every node $u_\ell$ belongs to $\operatorname{supp}\mu$, the smallest closed set of full $\mu$-measure, such that
+with every node $u_\ell$ in $\operatorname{supp}\mu$ and
 \begin{equation}
 m\le D_{d,r}\triangleq\binom{d+2r-1}{2r},\qquad
 \mathsf T_{2r}(\nu_r)=\mathsf T_{2r}(\mu).
@@ -88,6 +92,38 @@ Here $m$ is the number of nodes and $\binom{n}{k}=n!/[k!(n-k)!]$ is the binomial
 
 Let $\Phi(u)$ be the vector of these monomials. Its image on the compact set $\operatorname{supp}\mu$ lies in an affine hyperplane, because $(\sum_i u_i^2)^r=1$. The vector $\EE_\mu\Phi(U)$ lies in its convex hull. Carath\'eodory's theorem represents it by at most $D_{d,r}$ image points; discard zero weights. This is the classical finite-dimensional cubature argument underlying Tchakaloff's theorem \cite{bayer2006}. Lemma~\ref{lem:characterization} supplies exact coverage matching for every rank, and (a)--(b) give the information guarantees.
 \end{proof}
+
+\begin{corollary}[Gaussian error at every finite SNR]\label{cor:gaussian_representation}
+For Gaussian amplitudes and order-$r$ coverage-equivalent laws at rank $K$, let $q=\gamma/(\gamma+2)$ and define
+\begin{equation}
+\delta_r(\gamma)=\min\left\{\frac{\gamma^{r+1}}{2(r+1)},
+\frac{q^{r+1}}{(r+1)(1-q)}\right\}.
+\label{eq:compression_delta}
+\end{equation}
+For every finite $\gamma\ge0$, both the uniform objective error and optimal-value error are at most $\delta_r(\gamma)$. A globally optimal surrogate design has original-law regret at most $2\delta_r(\gamma)$. The finite surrogate of Theorem~\ref{thm:representation}(c) has these guarantees at every rank. At fixed positive finite SNR, the error bound converges geometrically in $r$.
+\end{corollary}
+\begin{proof}
+For $h_R(s)=\tfrac12\log(1+s)$, the exact signed remainder after degree $r$ is
+\begin{equation}
+\mathcal R_{r+1}^{\rm G}(c)=\frac{(-1)^r}{2}\int_0^{\gamma c}\frac{t^r}{1+t}\,dt.
+\label{eq:signed_remainder}
+\end{equation}
+Its values on $0\le c\le1$ lie in an interval of length at most $\gamma^{r+1}/[2(r+1)]$. After polynomial cancellation, the difference of two expectations is bounded by this interval length.
+
+For the complementary bound, write
+\begin{equation}
+\tfrac12\log(1+\gamma c)=\tfrac12\log(1+\gamma/2)
++\tfrac12\log(1+q(2c-1)).
+\end{equation}
+The second logarithm's degree-$r$ polynomial has uniform remainder at most $q^{r+1}/[2(r+1)(1-q)]$. Coverage matching cancels this polynomial and the two remainder bounds add. Theorem~\ref{thm:representation}(a)--(b) transfers the resulting objective bound to optimal values and design regret.
+\end{proof}
+
+For a prescribed SNR interval $0\le\gamma\le\Gamma$ with $\Gamma>0$, the same Gaussian surrogate has uniform error at most $\delta_r(\Gamma)$. For $0<\epsilon<1$, set $q_\Gamma=\Gamma/(\Gamma+2)$. It suffices to choose $r\ge1$ with
+\begin{equation}
+r+1\ge\frac{\log[1/(\epsilon(1-q_\Gamma))]}{-\log q_\Gamma}
+\label{eq:error_budget}
+\end{equation}
+to obtain error at most $\epsilon$ and transfer regret at most $2\epsilon$. At fixed $d$ and $\Gamma$, the sufficient support size is $O((\log(1/\epsilon))^{d-1})$. This is a cubature-existence guarantee, not a computational-efficiency bound; the statistical sample requirement is treated below. For example, $D_{8,1}=36$, $D_{8,2}=330$, and $D_{8,3}=1716$, so the bound need not compress a smaller original law. For finite laws, linear moment constraints provide a constructive route, with residual moment errors covered by Theorem~\ref{thm:representation}(a).
 
 \begin{proposition}[Projective-Wasserstein law perturbation]
 \label{prop:wasserstein}
@@ -243,15 +279,16 @@ For Gaussian amplitudes, $L_\Gamma=1/2$, so the joint error specializes to
 \label{eq:joint_gaussian}
 \end{equation}
 
-The next result closes the gap between a known directional law and a law learned
-from finitely many directions. It uses the empirical law
-$\widehat\mu_N=N^{-1}\sum_{i=1}^N\delta_{U_i}$ and is uniform over the continuous
-projector class, rather than over a finite numerical candidate set.
+The next result closes the gap between a known directional law and one
+learned from independent direction samples. Its guarantee is uniform over
+the continuous projector class, rather than over a finite numerical
+candidate set.
 
 \begin{corollary}[Finite-sample learned-law guarantee]
 \label{cor:finite_sample}
 Let $N,r\ge1$, let $U_1,\ldots,U_N$ be independent samples from $\mu$, let $\gamma>0$, and
-suppose $h_R\in C^{r+1}([0,\gamma])$. Define
+suppose $h_R\in C^{r+1}([0,\gamma])$. Define the empirical law
+$\widehat\mu_N=N^{-1}\sum_{i=1}^N\delta_{U_i}$ and set
 \begin{equation}
 L_\gamma=\sup_{0\le s\le\gamma}|h_R'(s)|,
 \qquad
@@ -343,38 +380,6 @@ scales with its intrinsic dimension $K(d-K)$, at the cost of additional
 covering constants \cite{dai2008}. We retain the ambient argument so the stated
 finite-sample constant follows from the elementary volume bound alone.
 \end{remark}
-
-\begin{corollary}[Gaussian error at every finite SNR]\label{cor:gaussian_representation}
-For Gaussian amplitudes and order-$r$ coverage-equivalent laws at rank $K$, let $q=\gamma/(\gamma+2)$ and define
-\begin{equation}
-\delta_r(\gamma)=\min\left\{\frac{\gamma^{r+1}}{2(r+1)},
-\frac{q^{r+1}}{(r+1)(1-q)}\right\}.
-\label{eq:compression_delta}
-\end{equation}
-For every finite $\gamma\ge0$, both the uniform objective error and optimal-value error are at most $\delta_r(\gamma)$. A globally optimal surrogate design has original-law regret at most $2\delta_r(\gamma)$. The finite surrogate of Theorem~\ref{thm:representation}(c) has these guarantees at every rank. At fixed positive finite SNR, the error bound converges geometrically in $r$.
-\end{corollary}
-\begin{proof}
-For $h_R(s)=\tfrac12\log(1+s)$, the exact signed remainder after degree $r$ is
-\begin{equation}
-\rho_{r+1}(c)=\frac{(-1)^r}{2}\int_0^{\gamma c}\frac{t^r}{1+t}\,dt.
-\label{eq:signed_remainder}
-\end{equation}
-Its values on $0\le c\le1$ lie in an interval of length at most $\gamma^{r+1}/[2(r+1)]$. After polynomial cancellation, the difference of two expectations is bounded by this interval length.
-
-For the complementary bound, write
-\begin{equation}
-\tfrac12\log(1+\gamma c)=\tfrac12\log(1+\gamma/2)
-+\tfrac12\log(1+q(2c-1)).
-\end{equation}
-The second logarithm's degree-$r$ polynomial has uniform remainder at most $q^{r+1}/[2(r+1)(1-q)]$. Coverage matching cancels this polynomial and the two remainder bounds add. Theorem~\ref{thm:representation}(a)--(b) transfers the resulting objective bound to optimal values and design regret.
-\end{proof}
-
-For a prescribed SNR interval $0\le\gamma\le\Gamma$ with $\Gamma>0$, the same Gaussian surrogate has uniform error at most $\delta_r(\Gamma)$. For $0<\epsilon<1$, set $q_\Gamma=\Gamma/(\Gamma+2)$. It suffices to choose $r\ge1$ with
-\begin{equation}
-r+1\ge\frac{\log[1/(\epsilon(1-q_\Gamma))]}{-\log q_\Gamma}
-\label{eq:error_budget}
-\end{equation}
-to obtain error at most $\epsilon$ and transfer regret at most $2\epsilon$. At fixed $d$ and $\Gamma$, the sufficient support size is $O((\log(1/\epsilon))^{d-1})$. This is a cubature-existence guarantee, not a computational-efficiency bound; statistical sample complexity is given separately by \eqref{eq:sample_complexity}. For example, $D_{8,1}=36$, $D_{8,2}=330$, and $D_{8,3}=1716$, so the bound need not compress a smaller original law. For finite laws, linear moment constraints provide a constructive route, with residual moment errors covered by Theorem~\ref{thm:representation}(a).
 
 \subsection{Spherical Designs and Explicit Ensembles}
 A spherical $t$-design reproduces spherical averages of all polynomials of degree at most $t$ \cite{delsarte1977}. It is therefore sufficient, though not necessary, for even-moment matching.

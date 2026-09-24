@@ -63,7 +63,11 @@ Under the $C^3$ hypotheses of Theorem~\ref{thm:stability}(b), write $U=(x^{\top}
 Thus the cubic order in \eqref{eq:explicit_regret} is attained whenever $h_R''(0)\ne0$ and at least one $A_{ji}$ is nonzero.
 \end{corollary}
 \begin{proof}
-In the chart of Appendix~\ref{app:subspace}, subtract the value at $T=0$ from the value at $T_\gamma$. The leading two contributions are
+Let $T$ be the local graph coordinate of a projector near $P_0$, as
+constructed in Appendix~\ref{app:subspace}, with $T=0$ representing $P_0$.
+Write $T_\gamma$ for the coordinate of the optimizer $P_\gamma$.
+Subtracting the value at $T=0$ from the value at $T_\gamma$ gives the
+leading two contributions
 \begin{equation*}
 -h_R'(0)\gamma\sum_{j,i}(\lambda_i-\lambda_{K+j})(T_\gamma)_{ji}^2
 +2h_R''(0)\gamma^2\sum_{j,i}A_{ji}(T_\gamma)_{ji}.
