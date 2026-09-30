@@ -56,6 +56,23 @@ class WorkflowTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unit"):
             DirectionalLaw.empirical([[2, 0], [0, 1]])
 
+    def test_rank_two_transfer_in_eight_dimensions(self) -> None:
+        rng = np.random.default_rng(82)
+        u = rng.normal(size=(120, 8))
+        u /= np.linalg.norm(u, axis=1, keepdims=True)
+        law = DirectionalLaw.empirical(u)
+        proxy = compress_moments(law, order=1, seed=82)
+        q0, _ = covariance_subspace(law, rank=2)
+        candidates = [q0]
+        for _ in range(12):
+            q, _ = np.linalg.qr(rng.normal(size=(8, 2)))
+            candidates.append(q)
+        report = candidate_transfer(law, proxy.law, np.stack(candidates), snr=2.0)
+        self.assertLessEqual(len(proxy.law.weights), proxy.feature_count)
+        self.assertLessEqual(report.candidate_regret,
+                             2 * report.uniform_candidate_error + 1e-12)
+        self.assertAlmostEqual(information(law, q0, 0.0), 0.0)
+
 
 if __name__ == "__main__":
     unittest.main()
