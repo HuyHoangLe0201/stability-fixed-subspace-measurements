@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fixed-subspace-information"
+version = "0.1.0"
+description = "Reusable information design and moment compression for fixed subspace measurements"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24,<3", "scipy>=1.11,<2"]
+license = {file = "LICENSE"}
+authors = [
+  {name = "Huy Hoang Le"},
+  {name = "Kim-Anh Nguyen"},
+]
+
+[project.urls]
+Repository = "https://github.com/HuyHoangLe0201/stability-fixed-subspace-measurements"
+
+[project.scripts]
+fixed-subspace = "fixed_subspace.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["fixed_subspace*"]

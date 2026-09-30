@@ -1,38 +1,72 @@
-# Stability of Information-Optimal Fixed Subspace Measurements Under Directional Uncertainty
+# Fixed subspace information design
 
-This repository contains the manuscript source, compiled PDF, numerical data, and Python code needed to reproduce the figures and numerical checks. It accompanies the paper by Huy Hoang Le and Kim-Anh Nguyen.
+Python tools for choosing a fixed measurement subspace when the signal direction
+varies and is known at decoding. The library works with a finite weighted law
+on unit directions. It evaluates retained scalar-channel mutual information,
+finds the leading covariance eigenspace, compresses the directional law while
+matching even moments, and measures design transfer over a user-supplied finite
+candidate set.
 
-## Manuscript
+The default information function is for a **real Gaussian** scalar amplitude:
+`0.5 * log(1 + SNR)` nats. Pass a vectorized `scalar_information` function to
+`information` or `candidate_transfer` for another amplitude prior. SNR values
+are linear, not decibels. The code does not assume the covariance subspace is
+globally information-optimal at finite SNR.
 
-- `paper/main.pdf`: compiled one-column manuscript.
-- `paper/main.tex`: entry point for the LaTeX source. All TikZ and PGFPlots mechanisms are defined there.
-- `paper/*.tex`: proofs, numerical sections, and generated numerical constants.
-- `paper/figures/*.pdf`: generated numerical figures.
+## Install
 
-The manuscript uses IEEEtran and TeX Live. On Windows, run `./build.ps1`; it finds `pdflatex.exe` on `PATH` or accepts an explicit `-TeXBin` directory. On Linux or macOS, run `make`. The repository includes `tex/IEEEtran.cls` for reproducibility.
-
-## Reproduce the results
-
-Install the packages in `requirements.txt`, then run:
-
-```text
-python scripts/reproduce.py
-python scripts/reproduce_core.py
-python scripts/reproduce_rank.py
-python scripts/verify_theory.py
-python scripts/verify_revision.py
+```bash
+python -m pip install .
 ```
 
-Rebuild the manuscript after regenerating the data. The scripts use fixed seeds 20260918, 20260919, and 20260920, respectively. Finite-law expectations are direct weighted sums. The output files under `experiments/` include the numerical values, compressed directional laws, candidate projectors, and residuals used in the paper.
+## Apply to your own directions
 
-Angular searches, finite candidate families, and sampled suprema are numerical diagnostics; they do not certify global optimality over all projectors. Analytic bounds and exact identities are proved in the manuscript. The Gaussian and projective-Wasserstein checks are independent calculations, not substitutes for the proofs.
+Store one unit direction per row in a numeric CSV. For example, to compress a
+3-dimensional empirical law through degree-four moments and evaluate a rank-one
+covariance design at SNR 1:
 
-## Repository layout
+```bash
+fixed-subspace directions.csv --rank 1 --order 2 --snr 1 --output compressed_law.npz
+```
 
-- `scripts/reproduce_core.py`: four-direction optimizer, orientation, compression, and finite-sample experiments.
-- `scripts/reproduce_rank.py`: rank-two design transfer in eight dimensions.
-- `scripts/reproduce.py`: Haar and finite-design reference calculations.
-- `scripts/verify_theory.py` and `scripts/verify_revision.py`: independent numerical checks.
-- `experiments/core_revision/`, `experiments/rank_revision/`, and `experiments/reproduced/`: saved results and metadata.
+Add `--weights weights.csv` for a weighted law. The output contains retained
+directions, normalized weights, their original row indices, and the covariance
+basis. The command prints the largest moment residual and information values.
+It does not claim to find a global finite-SNR optimizer.
 
-The repository excludes historical manuscript drafts and experiments that are not used by the current paper.
+Python users can work directly with the library:
+
+```python
+from fixed_subspace import DirectionalLaw, compress_moments, covariance_subspace, information
+
+law = DirectionalLaw.empirical(directions)  # shape (n, d); unit rows
+basis, eigenvalues = covariance_subspace(law, rank=2)
+proxy = compress_moments(law, order=2, seed=0)
+value = information(law, basis, snr=1.0)
+```
+
+Run `python -m examples.basic_usage` for the full workflow, including candidate
+design transfer. Run `python -m examples.reproduce_checks` to regenerate two
+representative numerical checks with fixed settings. Neither example downloads
+data or needs the manuscript. Run `python -m unittest discover -s tests` to
+check the installation.
+
+## Interpretation and limits
+
+- `covariance_subspace` optimizes the leading low-SNR term. The finite-SNR
+  optimum may differ.
+- `compress_moments` solves a positive linear program on the supplied support.
+  Degree `2 * order` matching on the unit sphere also matches lower even
+  degrees. It reports a floating-point residual, and the number of moment
+  features grows rapidly with dimension and order.
+- `candidate_transfer` compares a **finite family** of subspaces. Its regret is
+  relative to that family, not all possible subspaces.
+- `gaussian_matching_error_bound` is the theoretical uniform bound for exact
+  even-moment matching. Numerical residuals need separate consideration.
+
+The repository contains reusable method code and small numerical examples.
+It does not contain the manuscript, compiled paper, paper-specific plots, or
+archived experiment outputs.
+
+The code is available under the MIT License; retain the copyright notice when
+reusing it.

@@ -1,9 +1,10 @@
-paper/*.aux
-paper/*.log
-paper/*.out
-paper/*.toc
-paper/build-pass-*.txt
-validation/precision_revision_pages/
 __pycache__/
 *.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+compressed_law.npz
+outputs/
 .DS_Store
